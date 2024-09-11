@@ -1,4 +1,38 @@
 <!DOCTYPE html>
+<?php
+session_start();
+require_once 'Database.php';
+require_once 'User.php';
+require_once 'Role.php';
+require_once 'Categorie.php';
+
+// Connexion à la base de données
+$database = new Database();
+$db = $database->getConnection();
+
+$user = new User($db);
+$role = new Role($db);
+
+//on cherche si les roles existent deja sinon on le cree
+$listRole = $role->read();
+if (count($listRole) <= 0) {
+  $role->nom = "Admin";
+  $role->create();
+  $role->nom = "Client";
+  $role->create();
+}
+$listUser = $user->read();
+if (count($listUser) <= 0) {
+  $user->noms = 'AMON POULET';
+  $user->sexe = 'M';
+  $user->email = 'amon@gmail.com';
+  $user->password = '123456789';
+  $user->role_id = 1; // Admin
+  $user->create();
+  
+}
+
+?>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
