@@ -87,7 +87,7 @@
 				<section class="vh-100">
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center  h-100">
-      <h2 class="text-dark">Connexion</h2>
+      <h2 class="text-dark">Nouveau Compte</h2>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
 	  <?php
 	  session_start();
@@ -96,31 +96,49 @@
                     // Supprimer le message d'erreur après l'affichage
                     unset($_SESSION['msg']);
                   }
+                  if (isset($_SESSION['msgSuc'])) {
+                    echo "<p class='alert alert-success'>" . $_SESSION['msgSuc'] . "</p>";
+                    // Supprimer le message d'erreur après l'affichage
+                    unset($_SESSION['msgSuc']);
+                  }
                   ?>
-        <form method="post" action="t.php">
+        <form method="post" action="t2.php">
           
 
-          <!-- Email input -->
+        <div class="mb-4">
+                    <label class="form-label" for="signup-name">Nom Complet</label>
+                    <input class="form-control" type="text" id="signup-name" name="noms" placeholder="Nom Complet..." required>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label mt-4" for="signup-name">Sexe</label>
+                    <select name="sexe" id="sexe" class="form-select form-control mb-2">
+                                    <option value="M">M</option>
+                                    <option value="F">F</option>
+                                    
+                                    </select>
+                  </div>
           <div class="form-outline mb-4">
+          <label class="form-label" for="form3Example3">Email</label>
             <input type="email" id="form3Example3" name="email" class="form-control form-control-lg"
               placeholder="Votre adresse email" />
-            <label class="form-label" for="form3Example3">Email</label>
+            
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-3">
+          <label class="form-label" for="form3Example4">Mot de passe</label>
             <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"
               placeholder="Votre mot de passe" />
-            <label class="form-label" for="form3Example4">Mot de passe</label>
+            
           </div>
 
          
 
           <div class="text-center text-lg-start mt-4 pt-2">
             <button type="submit" class="btn btn-primary btn-lg"
-              style="padding-left: 2.5rem; padding-right: 2.5rem;">Se Connecter</button>
-            <p class="small fw-bold mt-2 pt-1 mb-0">Vous n'avez pas de compte? <a href="creer-compte.php"
-                class="link-danger">Créez un</a></p>
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Créer compte</button>
+            <p class="small fw-bold mt-2 pt-1 mb-0">Vous avez compte? <a href="connexion.php"
+                class="link-danger">Connectez-vous</a></p>
             <p class="small fw-bold mt-2 pt-1 mb-0"> <a href="index.php"
                 class="link-primary"><i class="fa fa-home"></i> Accueil</a></p>
           </div>

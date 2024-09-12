@@ -65,5 +65,27 @@ class Categorie {
 
         return false;
     }
+    public function findById($id) {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+    
+        if ($stmt === false) {
+            throw new Exception('Erreur lors de la préparation de la requête.');
+        }
+    
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($row) {
+            // Remplir les propriétés de l'objet Role avec les valeurs de la base de données
+            $this->id = $row['id'];
+            $this->nom = $row['nom'];
+            return $this;
+        }
+    
+        return null; // Retourner null si aucun rôle n'a été trouvé
+    }
 }
 ?>
