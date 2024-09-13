@@ -47,19 +47,44 @@ if (count($listCategorie) <= 0) {
 $listProduits=$produit->read();
 if (count($listProduits) <= 0) {
 	$produit->nom = 'DELL SPOK';
+	$produit->prix = 150;
+	$produit->image = 'product01.png';
 	$produit->categorie_id = 1;
 	$produit->create();
 	$produit->nom = 'HP PROBOOK';
+	$produit->prix = 178;
+	$produit->image = 'product03.png';
 	$produit->categorie_id = 1;
 	$produit->create();
 	$produit->nom = 'TABLETTE SAMSUNG A 99';
 	$produit->categorie_id = 2;
+	$produit->prix = 120;
+	$produit->image = 'product04.png';
 	$produit->create();
 	$produit->nom = 'CASQUES DELL';
 	$produit->categorie_id = 3;
+	$produit->prix = 75;
+	$produit->image = 'product02.png';
+	$produit->create();
+	$produit->nom = 'CASQUES POOL';
+	$produit->categorie_id = 3;
+	$produit->prix = 45;
+	$produit->image = 'product05.png';
+	$produit->create();
+	$produit->nom = 'TECHNO POP 12';
+	$produit->categorie_id = 2;
+	$produit->prix = 89;
+	$produit->image = 'product07.png';
+	$produit->create();
+	$produit->nom = 'APPAREIL PHOTO KANON';
+	$produit->categorie_id = 3;
+	$produit->prix = 450;
+	$produit->image = 'product09.png';
 	$produit->create();
 	
   }
+  //est ce qu'il est connecté?
+  $isLoggedIn = isset($_SESSION['idUser']) ? true : false;
 ?>
 <html lang="en">
 	<head>
@@ -159,8 +184,19 @@ if (count($listProduits) <= 0) {
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
-										<span>Your Cart</span>
-										<div class="qty">3</div>
+										<span>Panier</span>
+										<div class="qty"><?php 
+										$totalQte = 0;
+										
+										if (isset($_SESSION['panier'])) {
+											foreach ($_SESSION['panier'] as $p) {
+												$totalQte += $p['qte'];
+											}
+										}
+										echo $totalQte;
+										
+										?>
+										</div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
@@ -226,7 +262,7 @@ if (count($listProduits) <= 0) {
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
+						<li class="active"><a href="#">Acceuil</a></li>
 						
 					</ul>
 					<!-- /NAV -->
@@ -245,7 +281,18 @@ if (count($listProduits) <= 0) {
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-
+				<?php
+                  if (isset($_SESSION['msg'])) {
+                    echo "<p class='alert alert-danger'>" . $_SESSION['msg'] . "</p>";
+                    // Supprimer le message d'erreur après l'affichage
+                    unset($_SESSION['msg']);
+                  }
+                  if (isset($_SESSION['msgSuc'])) {
+                    echo "<p class='alert alert-success'>" . $_SESSION['msgSuc'] . "</p>";
+                    // Supprimer le message d'erreur après l'affichage
+                    unset($_SESSION['msgSuc']);
+                  }
+                  ?>
 					<!-- section title -->
 					<div class="col-md-12">
 						<div class="section-title">
@@ -271,7 +318,7 @@ if (count($listProduits) <= 0) {
 									<!-- product -->
 										<div class="product">
 											<div class="product-img">
-												<img src="./img/product01.png" alt="">
+												<img src="./img/<?php echo $p['image'] ?>" alt="">
 												<div class="product-label">
 													
 												</div>
@@ -279,7 +326,7 @@ if (count($listProduits) <= 0) {
 											<div class="product-body">
 												<p class="product-category"><?php echo $cat->nom ?></p>
 												<h3 class="product-name"><a href="#"><?php echo $p['nom'] ?></a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+												<h4 class="product-price">$<?php echo $p['prix'] ?> <del class="product-old-price">$<?php echo $p['prix']+($p['prix']*0.3) ?></del></h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
@@ -288,13 +335,30 @@ if (count($listProduits) <= 0) {
 													<i class="fa fa-star"></i>
 												</div>
 												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Favoris</span></button>
+													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">Comparer</span></button>
+													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Voir</span></button>
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<form <?php if ($isLoggedIn) { echo "action='t3.php'"; } ?> method="post">
+
+													<input type="hidden" name="nom" value="<?php echo $p['nom'] ?>">
+													<input type="hidden" name="prix" value="<?php echo $p['prix'] ?>">
+													<input type="hidden" name="image" value="<?php echo $p['image'] ?>">
+													<input type="hidden" name="qte" value=1>
+													<input type="hidden" name="id" value="<?php echo $p['id'] ?>">
+													<?php 
+															if($isLoggedIn){
+																?>
+																<button class="add-to-cart-btn"  name="ajouterAuPanier"><i class="fa fa-shopping-cart"></i> Ajouter au Panier</button>
+																<?php 	}else{ ?>
+																	<button class="add-to-cart-btn"  onclick="alert('Veuillez d\'abord vous connecter ou si vous n\'avez pas encore un compte, créez-en un.');"><i class="fa fa-shopping-cart"></i> Ajouter au Panier</button>
+																	<?php  }?>
+												
+												</form>
+												
+												
 											</div>
 										</div>
 										<!-- /product -->

@@ -125,14 +125,14 @@
           </div>
 
           <!-- Password input -->
-          <div class="form-outline mb-3">
+          <div class="form-outline">
           <label class="form-label" for="form3Example4">Mot de passe</label>
             <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"
               placeholder="Votre mot de passe" />
             
           </div>
 
-         
+		  <br>
 
           <div class="text-center text-lg-start mt-4 pt-2">
             <button type="submit" class="btn btn-primary btn-lg"

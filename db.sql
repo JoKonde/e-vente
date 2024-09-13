@@ -29,6 +29,8 @@ CREATE TABLE categorie (
 CREATE TABLE produit (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(255) NOT NULL,
+    prix FLOAT NOT NULL,
+    image VARCHAR(255),
     categorie_id INT,
     date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (categorie_id) REFERENCES categorie(id)
