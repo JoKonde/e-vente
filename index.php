@@ -19,22 +19,21 @@ $produit = new Produit($db);
 //on cherche si les roles existent deja sinon on le cree
 $listRole = $role->read();
 if (count($listRole) <= 0) {
-  $role->nom = "Admin";
-  $role->create();
-  $role->nom = "Client";
-  $role->create();
+	$role->nom = "Admin";
+	$role->create();
+	$role->nom = "Client";
+	$role->create();
 }
 $listUser = $user->read();
 if (count($listUser) <= 0) {
-  $user->noms = 'AMON POULET';
-  $user->sexe = 'M';
-  $user->email = 'amon@gmail.com';
-  $user->password = '123456789';
-  $user->role_id = 1; // Admin
-  $user->create();
-  
+	$user->noms = 'AMON POULET';
+	$user->sexe = 'M';
+	$user->email = 'amon@gmail.com';
+	$user->password = '123456789';
+	$user->role_id = 1; // Admin
+	$user->create();
 }
-$listCategorie=$categorie->read();
+$listCategorie = $categorie->read();
 if (count($listCategorie) <= 0) {
 	$categorie->nom = 'ORDINATEUR PORTABLE';
 	$categorie->create();
@@ -42,9 +41,8 @@ if (count($listCategorie) <= 0) {
 	$categorie->create();
 	$categorie->nom = 'ACCESSOIRES ELECTRONIQUES';
 	$categorie->create();
-	
-  }
-$listProduits=$produit->read();
+}
+$listProduits = $produit->read();
 if (count($listProduits) <= 0) {
 	$produit->nom = 'DELL SPOK';
 	$produit->prix = 150;
@@ -81,252 +79,278 @@ if (count($listProduits) <= 0) {
 	$produit->prix = 450;
 	$produit->image = 'product09.png';
 	$produit->create();
-	
-  }
-  //est ce qu'il est connecté?
-  $isLoggedIn = isset($_SESSION['idUser']) ? true : false;
+}
+//est ce qu'il est connecté?
+$isLoggedIn = isset($_SESSION['idUser']) ? true : false;
 ?>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Electro - Acceuil</title>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<!-- Google font -->
-		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+	<title>Electro - Acceuil</title>
 
-		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
-		<!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="css/slick.css"/>
-		<link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
 
-		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" href="css/slick.css" />
+	<link type="text/css" rel="stylesheet" href="css/slick-theme.css" />
 
-		<!-- Font Awesome Icon -->
-		<link rel="stylesheet" href="css/font-awesome.min.css">
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" href="css/nouislider.min.css" />
 
-		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 
-		
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="css/style.css" />
 
-    </head>
-	<body>
-		<!-- HEADER -->
-		<header>
-			<!-- TOP HEADER -->
-			<div id="top-header">
-				<div class="container">
-					
-					<ul class="header-links pull-right">
-						<?php 
-						if(isset($_SESSION['email'])){
-							if($_SESSION['email']){?>
-								<li class="text-light"><a href="#"><i class="fa fa-user"></i><?php echo $_SESSION['noms'] ?> </a></li>
-								<li><a href="deconnexion.php"><i class="fa fa-sign-out"></i> Deconnexion</a></li>
-								<?php	}
-						}else{?>
-							<li><a href="connexion.php"><i class="fa fa-user"></i> Connexion</a></li>
-							<li><a href="creer-compte.php"><i class="fa fa-user-o"></i> Créer Compte</a></li>
-							<?php }
 
-						?>
-						
-					</ul>
-				</div>
+
+</head>
+
+<body>
+	<!-- HEADER -->
+	<header>
+		<!-- TOP HEADER -->
+		<div id="top-header">
+			<div class="container">
+
+				<ul class="header-links pull-right">
+					<?php
+					if (isset($_SESSION['email'])) {
+						if ($_SESSION['email']) { ?>
+							<li class="text-light"><a href="#"><i class="fa fa-user"></i><?php echo $_SESSION['noms'] ?> </a></li>
+							<li><a href="deconnexion.php"><i class="fa fa-sign-out"></i> Deconnexion</a></li>
+						<?php	}
+					} else { ?>
+						<li><a href="connexion.php"><i class="fa fa-user"></i> Connexion</a></li>
+						<li><a href="creer-compte.php"><i class="fa fa-user-o"></i> Créer Compte</a></li>
+					<?php }
+
+					?>
+
+				</ul>
 			</div>
-			<!-- /TOP HEADER -->
+		</div>
+		<!-- /TOP HEADER -->
 
-			<!-- MAIN HEADER -->
-			<div id="header">
-				<!-- container -->
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<!-- LOGO -->
-						<div class="col-md-3">
-							<div class="header-logo">
-								<a href="index.php" class="logo">
-									<img src="./img/logo.png" alt="">
-								</a>
-							</div>
+		<!-- MAIN HEADER -->
+		<div id="header">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- LOGO -->
+					<div class="col-md-3">
+						<div class="header-logo">
+							<a href="index.php" class="logo">
+								<img src="./img/logo.png" alt="">
+							</a>
 						</div>
-						<!-- /LOGO -->
+					</div>
+					<!-- /LOGO -->
 
-						<!-- SEARCH BAR -->
-						<div class="col-md-6">
-							<div class="header-search">
-								<form>
-									<select class="input-select">
-										<option value="0">Categories</option>
-										<option value="1">Categorie 1</option>
-										<option value="1">Categorie 2</option>
-									</select>
-									<input class="input" placeholder="Recherche...">
-									<button class="search-btn">Chercher</button>
-								</form>
-							</div>
+					<!-- SEARCH BAR -->
+					<div class="col-md-6">
+						<div class="header-search">
+							<form>
+								<select class="input-select">
+									<option value="0">Categories</option>
+									<option value="1">Categorie 1</option>
+									<option value="1">Categorie 2</option>
+								</select>
+								<input class="input" placeholder="Recherche...">
+								<button class="search-btn">Chercher</button>
+							</form>
 						</div>
-						<!-- /SEARCH BAR -->
+					</div>
+					<!-- /SEARCH BAR -->
 
-						<!-- ACCOUNT -->
-						<div class="col-md-3 clearfix">
-							<div class="header-ctn">
-								
+					<!-- ACCOUNT -->
+					<div class="col-md-3 clearfix">
+						<div class="header-ctn">
 
-								<!-- Cart -->
-								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-										<i class="fa fa-shopping-cart"></i>
-										<span>Panier</span>
-										<div class="qty"><?php 
+
+							<!-- Cart -->
+							<div class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<i class="fa fa-shopping-cart"></i>
+									<span>Panier</span>
+									<div class="qty">
+										<?php
 										$totalQte = 0;
-										
 										if (isset($_SESSION['panier'])) {
 											foreach ($_SESSION['panier'] as $p) {
 												$totalQte += $p['qte'];
 											}
 										}
 										echo $totalQte;
-										
 										?>
-										</div>
-									</a>
-									<div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product01.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product02.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-										</div>
-										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
-										</div>
-										<div class="cart-btns">
-											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-										</div>
 									</div>
-								</div>
-								<!-- /Cart -->
+								</a>
+								<div class="cart-dropdown">
+									<div class="cart-list">
+										<?php
+										if (!isset($_SESSION['panier']) || empty($_SESSION['panier'])) {
+											echo "<p>Votre panier est vide.</p>";
+										} else {
+											$totalPrix = 0; // Initialisation du total
+											foreach ($_SESSION['panier'] as $pr) {
+												$totalPrixItem = $pr['prix'] * $pr['qte'];
+												$totalPrix += $totalPrixItem;
+										?>
+												<div class="product-widget">
+													<div class="product-img">
+														<img src="./img/<?php echo $pr['image']; ?>" alt="">
+													</div>
+													<div class="product-body">
+														<h3 class="product-name"><a href="#"><?php echo $pr['nom']; ?></a></h3>
+														<h4 class="product-price">
+															<span class="qty"><?php echo $pr['qte']; ?>x</span>
+															$<?php echo $pr['prix']; ?>
+														</h4>
+													</div>
+													<button class="delete"><i class="fa fa-close"></i></button>
+												</div>
+											<?php
+											} // Fin de la boucle foreach
+											?>
+									</div>
 
-								<!-- Menu Toogle -->
-								<div class="menu-toggle">
-									<a href="#">
-										<i class="fa fa-bars"></i>
-										<span>Menu</span>
-									</a>
-								</div>
-								<!-- /Menu Toogle -->
-							</div>
-						</div>
-						<!-- /ACCOUNT -->
-					</div>
-					<!-- row -->
-				</div>
-				<!-- container -->
-			</div>
-			<!-- /MAIN HEADER -->
-		</header>
-		<!-- /HEADER -->
-
-		<!-- NAVIGATION -->
-		<nav id="navigation">
-			<!-- container -->
-			<div class="container">
-				<!-- responsive-nav -->
-				<div id="responsive-nav">
-					<!-- NAV -->
-					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Acceuil</a></li>
-						
-					</ul>
-					<!-- /NAV -->
-				</div>
-				<!-- /responsive-nav -->
-			</div>
-			<!-- /container -->
-		</nav>
-		<!-- /NAVIGATION -->
-
-		
-
-		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-				<?php
-                  if (isset($_SESSION['msg'])) {
-                    echo "<p class='alert alert-danger'>" . $_SESSION['msg'] . "</p>";
-                    // Supprimer le message d'erreur après l'affichage
-                    unset($_SESSION['msg']);
-                  }
-                  if (isset($_SESSION['msgSuc'])) {
-                    echo "<p class='alert alert-success'>" . $_SESSION['msgSuc'] . "</p>";
-                    // Supprimer le message d'erreur après l'affichage
-                    unset($_SESSION['msgSuc']);
-                  }
-                  ?>
-					<!-- section title -->
-					<div class="col-md-12">
-						<div class="section-title">
-							<h3 class="title">Nos Produits</h3>
-							
-						</div>
-					</div>
-					<!-- /section title -->
-
-					<!-- Products tab & slick -->
-					<div class="col-md-12">
-						<div class="row">
-							<div class="products-tabs">
-								<!-- tab -->
-								<div id="tab1" class="tab-pane active">
-									<div class="products-slick" data-nav="#slick-nav-1">
+									<div class="cart-summary">
+										<small>
+											<?php echo count($_SESSION['panier']); ?> produit(s) sélectionné(s)
+										</small>
+										<h5>Total: $<?php 
+										$_SESSION['totalPrix']=$totalPrix;
 										
-									<?php 
-									$listProduits=$produit->read();
+										echo $totalPrix; ?></h5>
+									</div>
+									<div class="cart-btns">
+										<a href="vider.php">Vider</a>
+										<form name="pay" method="post" action="https://checkout.genesyspay.solutions/v1/init">
+											<button type="submit" class="btn btn-primary" ><i class="fa fa-arrow-circle-right"></i>Payer</button>
+        <input type="hidden" name="public_key" value="GPPUB-69399c71f332a5cb00891368e557f12d50ac141f">
+        <input type="hidden" name="order_id" value="123456789">
+        
+        <input type="hidden" name="amount" value="<?php echo  $totalPrix; ?>">
+        <input type="hidden" name="currency" value="USD">
+        <input type="hidden" name="redirect_url" value="http://localhost/e-vente/payement-reussi.php">
+        <input type="hidden" name="status_url" value="https://callback.url">
+        <input type="hidden" name="cancel_url" value="http://localhost/e-vente/payement-annule.php">
+        <input type="hidden" name="failed_url" value="http://localhost/e-vente/payement-echec.php">
+        
+    </form>
+									</div>
+								<?php
+										} // Fin du else pour vérifier si le panier est vide ou non
+								?>
+								</div>
+							</div>
+
+							<!-- /Cart -->
+
+							<!-- Menu Toogle -->
+							<div class="menu-toggle">
+								<a href="#">
+									<i class="fa fa-bars"></i>
+									<span>Menu</span>
+								</a>
+							</div>
+							<!-- /Menu Toogle -->
+						</div>
+					</div>
+					<!-- /ACCOUNT -->
+				</div>
+				<!-- row -->
+			</div>
+			<!-- container -->
+		</div>
+		<!-- /MAIN HEADER -->
+	</header>
+	<!-- /HEADER -->
+
+	<!-- NAVIGATION -->
+	<nav id="navigation">
+		<!-- container -->
+		<div class="container">
+			<!-- responsive-nav -->
+			<div id="responsive-nav">
+				<!-- NAV -->
+				<ul class="main-nav nav navbar-nav">
+					<li class="active"><a href="#">Acceuil</a></li>
+
+				</ul>
+				<!-- /NAV -->
+			</div>
+			<!-- /responsive-nav -->
+		</div>
+		<!-- /container -->
+	</nav>
+	<!-- /NAVIGATION -->
+
+
+
+	<!-- SECTION -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<?php
+				if (isset($_SESSION['msg'])) {
+					echo "<p class='alert alert-danger'>" . $_SESSION['msg'] . "</p>";
+					// Supprimer le message d'erreur après l'affichage
+					unset($_SESSION['msg']);
+				}
+				if (isset($_SESSION['msgSuc'])) {
+					echo "<p class='alert alert-success'>" . $_SESSION['msgSuc'] . "</p>";
+					// Supprimer le message d'erreur après l'affichage
+					unset($_SESSION['msgSuc']);
+				}
+				?>
+				<!-- section title -->
+				<div class="col-md-12">
+					<div class="section-title">
+						<h3 class="title">Nos Produits</h3>
+
+					</div>
+				</div>
+				<!-- /section title -->
+
+				<!-- Products tab & slick -->
+				<div class="col-md-12">
+					<div class="row">
+						<div class="products-tabs">
+							<!-- tab -->
+							<div id="tab1" class="tab-pane active">
+								<div class="products-slick" data-nav="#slick-nav-1">
+
+									<?php
+									$listProduits = $produit->read();
 									foreach ($listProduits as $p) {
 										$cat = $categorie->findById($p['categorie_id']);
-									  ?>
-									<!-- product -->
+									?>
+										<!-- product -->
 										<div class="product">
 											<div class="product-img">
 												<img src="./img/<?php echo $p['image'] ?>" alt="">
 												<div class="product-label">
-													
+
 												</div>
 											</div>
 											<div class="product-body">
 												<p class="product-category"><?php echo $cat->nom ?></p>
 												<h3 class="product-name"><a href="#"><?php echo $p['nom'] ?></a></h3>
-												<h4 class="product-price">$<?php echo $p['prix'] ?> <del class="product-old-price">$<?php echo $p['prix']+($p['prix']*0.3) ?></del></h4>
+												<h4 class="product-price">$<?php echo $p['prix'] ?> <del class="product-old-price">$<?php echo $p['prix'] + ($p['prix'] * 0.3) ?></del></h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
@@ -341,91 +365,96 @@ if (count($listProduits) <= 0) {
 												</div>
 											</div>
 											<div class="add-to-cart">
-											<form <?php if ($isLoggedIn) { echo "action='t3.php'"; } ?> method="post">
+												<form <?php if ($isLoggedIn) {
+															echo "action='t3.php'";
+														} ?> method="post">
 
 													<input type="hidden" name="nom" value="<?php echo $p['nom'] ?>">
 													<input type="hidden" name="prix" value="<?php echo $p['prix'] ?>">
 													<input type="hidden" name="image" value="<?php echo $p['image'] ?>">
 													<input type="hidden" name="qte" value=1>
 													<input type="hidden" name="id" value="<?php echo $p['id'] ?>">
-													<?php 
-															if($isLoggedIn){
-																?>
-																<button class="add-to-cart-btn"  name="ajouterAuPanier"><i class="fa fa-shopping-cart"></i> Ajouter au Panier</button>
-																<?php 	}else{ ?>
-																	<button class="add-to-cart-btn"  onclick="alert('Veuillez d\'abord vous connecter ou si vous n\'avez pas encore un compte, créez-en un.');"><i class="fa fa-shopping-cart"></i> Ajouter au Panier</button>
-																	<?php  }?>
-												
+													<?php
+													if ($isLoggedIn) {
+													?>
+														<button class="add-to-cart-btn" name="ajouterAuPanier"><i class="fa fa-shopping-cart"></i> Ajouter au Panier</button>
+													<?php 	} else { ?>
+														<button class="add-to-cart-btn" onclick="alert('Veuillez d\'abord vous connecter ou si vous n\'avez pas encore un compte, créez-en un.');"><i class="fa fa-shopping-cart"></i> Ajouter au Panier</button>
+													<?php  } ?>
+
 												</form>
-												
-												
+
+
 											</div>
 										</div>
 										<!-- /product -->
-										<?php } ?>
-									</div>
-									<div id="slick-nav-1" class="products-slick-nav"></div>
+									<?php } ?>
 								</div>
-								<!-- /tab -->
+								<div id="slick-nav-1" class="products-slick-nav"></div>
 							</div>
+							<!-- /tab -->
 						</div>
 					</div>
-					<!-- Products tab & slick -->
+				</div>
+				<!-- Products tab & slick -->
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /SECTION -->
+
+
+
+
+
+
+
+	<!-- FOOTER -->
+	<footer id="footer">
+
+
+		<!-- bottom footer -->
+		<div id="bottom-footer" class="section">
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<ul class="footer-payments">
+							<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+							<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+							<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+						</ul>
+						<span class="copyright">
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy;<script>
+								document.write(new Date().getFullYear());
+							</script> Tous les droits reservés.
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</span>
+
+
+					</div>
 				</div>
 				<!-- /row -->
 			</div>
 			<!-- /container -->
 		</div>
-		<!-- /SECTION -->
+		<!-- /bottom footer -->
+	</footer>
+	<!-- /FOOTER -->
 
-		
+	<!-- jQuery Plugins -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/slick.min.js"></script>
+	<script src="js/nouislider.min.js"></script>
+	<script src="js/jquery.zoom.min.js"></script>
+	<script src="js/main.js"></script>
 
-		
+</body>
 
-		
-
-		<!-- FOOTER -->
-		<footer id="footer">
-			
-
-			<!-- bottom footer -->
-			<div id="bottom-footer" class="section">
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<ul class="footer-payments">
-								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-							</ul>
-							<span class="copyright">
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tous les droits reservés.
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							</span>
-
-
-						</div>
-					</div>
-						<!-- /row -->
-				</div>
-				<!-- /container -->
-			</div>
-			<!-- /bottom footer -->
-		</footer>
-		<!-- /FOOTER -->
-
-		<!-- jQuery Plugins -->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/slick.min.js"></script>
-		<script src="js/nouislider.min.js"></script>
-		<script src="js/jquery.zoom.min.js"></script>
-		<script src="js/main.js"></script>
-
-	</body>
 </html>
