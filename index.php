@@ -236,19 +236,9 @@ $isLoggedIn = isset($_SESSION['idUser']) ? true : false;
 									</div>
 									<div class="cart-btns">
 										<a href="vider.php">Vider</a>
-										<form name="pay" method="post" action="https://checkout.genesyspay.solutions/v1/init">
-											<button type="submit" class="btn btn-primary" ><i class="fa fa-arrow-circle-right"></i>Payer</button>
-        <input type="hidden" name="public_key" value="GPPUB-69399c71f332a5cb00891368e557f12d50ac141f">
-        <input type="hidden" name="order_id" value="123456789">
-        
-        <input type="hidden" name="amount" value="<?php echo  $totalPrix; ?>">
-        <input type="hidden" name="currency" value="USD">
-        <input type="hidden" name="redirect_url" value="http://localhost/e-vente/payement-reussi.php">
-        <input type="hidden" name="status_url" value="https://callback.url">
-        <input type="hidden" name="cancel_url" value="http://localhost/e-vente/payement-annule.php">
-        <input type="hidden" name="failed_url" value="http://localhost/e-vente/payement-echec.php">
-        
-    </form>
+										<a href="paiement_mobile_simple.php" class="btn btn-success">
+											<i class="fa fa-mobile"></i> Payer
+										</a>
 									</div>
 								<?php
 										} // Fin du else pour vérifier si le panier est vide ou non
